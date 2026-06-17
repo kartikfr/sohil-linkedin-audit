@@ -917,39 +917,62 @@
   }
 
   @media (max-width: 768px) {
+    /* ── Hero: flex column, text first, identity strip below ── */
     #hero {
-      grid-template-columns: 1fr;
-      padding: 48px 6% 56px;
-      text-align: center;
-      gap: 32px;
+      display: flex;
+      flex-direction: column;
+      padding: 44px 5% 52px;
+      gap: 28px;
     }
 
-    /* Photo + score badge side by side on mobile */
+    /* Text block comes first visually */
+    .hero-right {
+      order: 1;
+      text-align: left;
+    }
+
+    /* Identity strip: photo + score badge as a horizontal row */
     .hero-left {
+      order: 2;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
-      gap: 20px;
+      justify-content: flex-start;
+      gap: 16px;
     }
 
-    .photo-ring { width: 140px; height: 140px; flex-shrink: 0; }
+    /* Small photo */
+    .photo-ring { width: 88px; height: 88px; flex-shrink: 0; }
 
-    /* Score badge compact on mobile */
+    /* Score badge: slim horizontal strip, not a big card */
     .score-badge {
-      max-width: 150px;
-      padding: 16px 18px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      max-width: none;
+      width: auto;
+      flex: 1;
+      padding: 12px 16px;
+      text-align: left;
     }
 
-    .score-ring-wrap { width: 90px; height: 90px; }
+    /* Tiny score ring */
+    .score-ring-wrap {
+      width: 52px;
+      height: 52px;
+      margin: 0;
+      flex-shrink: 0;
+    }
+    .score-ring-inner .num { font-size: 18px; }
+    .score-ring-inner .denom { font-size: 9px; }
+    .score-badge .score-label { margin-top: 0; font-size: 9px; letter-spacing: 0.1em; line-height: 1.4; }
 
-    .score-ring-inner .num { font-size: 28px; }
-    .score-ring-inner .denom { font-size: 11px; }
+    /* Left-align pills and scroll hint */
+    .stat-pills { justify-content: flex-start; }
+    .scroll-hint { justify-content: flex-start; }
+    .hero-sub { max-width: 100%; text-align: left; }
 
-    .score-badge .score-label { font-size: 9px; letter-spacing: 0.08em; margin-top: 4px; }
-
-    .stat-pills { justify-content: center; }
-    .scroll-hint { justify-content: center; }
-
+    /* Rest of sections */
     .problem-grid { grid-template-columns: 1fr; }
     .cards-grid { grid-template-columns: 1fr; }
     .scores-grid { grid-template-columns: 1fr 1fr; }
@@ -975,7 +998,6 @@
     }
 
     .tl-dot { top: 20px; left: 6px; }
-
     .tl-year { margin-top: 0; }
 
     #hero, #timeline, #working, #problem, #scorecard, #playbook, #quickwins {
@@ -987,13 +1009,9 @@
   @media (max-width: 480px) {
     .scores-grid { grid-template-columns: 1fr; }
     .win-item { grid-template-columns: 40px 1fr; }
-
-    /* Tighten hero further on small phones */
-    .hero-left { gap: 14px; }
-    .photo-ring { width: 120px; height: 120px; }
-    .score-badge { max-width: 136px; padding: 12px 14px; }
-    .score-ring-wrap { width: 76px; height: 76px; }
-    .score-ring-inner .num { font-size: 24px; }
+    .photo-ring { width: 76px; height: 76px; }
+    .score-ring-wrap { width: 44px; height: 44px; }
+    .score-ring-inner .num { font-size: 15px; }
   }
 </style>
 </head>
