@@ -916,63 +916,80 @@
     .playbook-grid { grid-template-columns: 1fr 1fr; }
   }
 
+  /* ── Hero scroll hint as direct child ── */
+  .hero-scroll {
+    padding-top: 4px;
+  }
+
   @media (max-width: 768px) {
-    /* ── Hero: flex column, text first, identity strip below ── */
+    /* 1. Hero: single column, flex */
     #hero {
       display: flex;
       flex-direction: column;
-      padding: 44px 5% 52px;
-      gap: 28px;
+      padding: 36px 5% 44px;
+      gap: 0;
     }
 
-    /* Text block comes first visually */
+    /* 2. Label + headline + sub: order 1, left-aligned */
     .hero-right {
       order: 1;
       text-align: left;
+      margin-bottom: 20px;
     }
+    .hero-sub { max-width: 100%; }
+    .stat-pills { justify-content: flex-start; margin-bottom: 0; }
 
-    /* Identity strip: photo + score badge as a horizontal row */
+    /* 3. Identity strip: photo left + score badge inline — order 2 */
     .hero-left {
       order: 2;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      gap: 16px;
+      gap: 14px;
+      margin-top: 24px;
     }
 
-    /* Small photo */
-    .photo-ring { width: 88px; height: 88px; flex-shrink: 0; }
+    /* Photo: compact */
+    .photo-ring { width: 72px; height: 72px; flex-shrink: 0; }
 
-    /* Score badge: slim horizontal strip, not a big card */
+    /* Score badge: horizontal pill */
     .score-badge {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       max-width: none;
       width: auto;
       flex: 1;
-      padding: 12px 16px;
+      padding: 10px 14px;
       text-align: left;
     }
 
-    /* Tiny score ring */
+    /* Tiny ring: 40px */
     .score-ring-wrap {
-      width: 52px;
-      height: 52px;
+      width: 40px;
+      height: 40px;
       margin: 0;
       flex-shrink: 0;
     }
-    .score-ring-inner .num { font-size: 18px; }
-    .score-ring-inner .denom { font-size: 9px; }
-    .score-badge .score-label { margin-top: 0; font-size: 9px; letter-spacing: 0.1em; line-height: 1.4; }
+    .score-ring-inner .num { font-size: 14px; }
+    .score-ring-inner .denom { font-size: 8px; }
+    .score-badge .score-label {
+      margin-top: 0;
+      font-size: 8px;
+      letter-spacing: 0.09em;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
 
-    /* Left-align pills and scroll hint */
-    .stat-pills { justify-content: flex-start; }
-    .scroll-hint { justify-content: flex-start; }
-    .hero-sub { max-width: 100%; text-align: left; }
+    /* 4. Scroll hint: order 3, sits right below identity strip */
+    .hero-scroll {
+      order: 3;
+      justify-content: flex-start;
+      margin-top: 20px;
+    }
 
-    /* Rest of sections */
+    /* Other sections */
     .problem-grid { grid-template-columns: 1fr; }
     .cards-grid { grid-template-columns: 1fr; }
     .scores-grid { grid-template-columns: 1fr 1fr; }
@@ -1009,9 +1026,6 @@
   @media (max-width: 480px) {
     .scores-grid { grid-template-columns: 1fr; }
     .win-item { grid-template-columns: 40px 1fr; }
-    .photo-ring { width: 76px; height: 76px; }
-    .score-ring-wrap { width: 44px; height: 44px; }
-    .score-ring-inner .num { font-size: 15px; }
   }
 </style>
 </head>
@@ -1071,13 +1085,13 @@
       <div class="pill"><span>11</span> Recommendations</div>
       <div class="pill"><span>4+</span> Media Features</div>
     </div>
+  </div>
 
-    <div class="scroll-hint fade-up">
-      <span>Scroll to explore the full audit</span>
-      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
-        <path d="M8 1v14M2 11l6 6 6-6" stroke="#E8A830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+  <div class="scroll-hint fade-up hero-scroll">
+    <span>Scroll to explore the full audit</span>
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+      <path d="M8 1v14M2 11l6 6 6-6" stroke="#E8A830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </div>
 </section>
 
