@@ -916,80 +916,97 @@
     .playbook-grid { grid-template-columns: 1fr 1fr; }
   }
 
-  /* ── Hero scroll hint as direct child ── */
-  .hero-scroll {
-    padding-top: 4px;
-  }
+  /* ── Scroll hint: desktop sits inside hero-right, always flex ── */
+  .hero-scroll { display: flex; }
 
+  /* ════════════════════════════════════
+     MOBILE — full redesign of first fold
+  ════════════════════════════════════ */
   @media (max-width: 768px) {
-    /* 1. Hero: single column, flex */
+
+    /* Hero: single column, centered top section, left-aligned text below */
     #hero {
       display: flex;
       flex-direction: column;
-      padding: 36px 5% 44px;
+      align-items: stretch;
+      padding: 40px 6% 48px;
       gap: 0;
+      min-height: unset;
     }
 
-    /* 2. Label + headline + sub: order 1, left-aligned */
-    .hero-right {
-      order: 1;
-      text-align: left;
-      margin-bottom: 20px;
-    }
-    .hero-sub { max-width: 100%; }
-    .stat-pills { justify-content: flex-start; margin-bottom: 0; }
-
-    /* 3. Identity strip: photo left + score badge inline — order 2 */
+    /* ── TOP BLOCK: photo centered, score badge overlapping bottom ── */
     .hero-left {
-      order: 2;
-      flex-direction: row;
+      order: 1;
+      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      gap: 14px;
-      margin-top: 24px;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 28px;
+      position: relative;
     }
 
-    /* Photo: compact */
-    .photo-ring { width: 72px; height: 72px; flex-shrink: 0; }
+    /* Photo: large, centered */
+    .photo-ring {
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+      margin-bottom: -20px; /* score badge overlaps bottom */
+    }
 
-    /* Score badge: horizontal pill */
+    /* Score badge: compact pill, centered below photo, overlapping */
     .score-badge {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 10px;
-      max-width: none;
+      max-width: 200px;
       width: auto;
-      flex: 1;
-      padding: 10px 14px;
+      padding: 8px 16px 8px 8px;
       text-align: left;
+      position: relative;
+      z-index: 2;
+      border-radius: 100px; /* pill shape on mobile */
+      background: var(--surface);
+      border: 1px solid rgba(232,168,48,0.25);
     }
 
-    /* Tiny ring: 40px */
+    /* Score ring: small */
     .score-ring-wrap {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       margin: 0;
       flex-shrink: 0;
     }
-    .score-ring-inner .num { font-size: 14px; }
+    .score-ring-inner .num { font-size: 16px; }
     .score-ring-inner .denom { font-size: 8px; }
     .score-badge .score-label {
       margin-top: 0;
-      font-size: 8px;
+      font-size: 9px;
       letter-spacing: 0.09em;
-      line-height: 1.35;
+      line-height: 1.4;
       white-space: nowrap;
     }
 
-    /* 4. Scroll hint: order 3, sits right below identity strip */
-    .hero-scroll {
-      order: 3;
-      justify-content: flex-start;
-      margin-top: 20px;
+    /* ── BOTTOM BLOCK: all text, left-aligned ── */
+    .hero-right {
+      order: 2;
+      text-align: left;
     }
 
-    /* Other sections */
+    /* Audit label: keep it but left-align */
+    .audit-label { margin-bottom: 16px; }
+
+    /* Headline: slightly smaller, still bold */
+    .hero-headline { font-size: clamp(28px, 8vw, 42px); margin-bottom: 12px; }
+
+    .hero-sub { max-width: 100%; font-size: 15px; margin-bottom: 24px; }
+
+    .stat-pills { justify-content: flex-start; margin-bottom: 0; }
+
+    /* Scroll hint: hidden on mobile — replaced by natural scroll */
+    .hero-scroll { display: none; }
+
+    /* ── OTHER SECTIONS ── */
     .problem-grid { grid-template-columns: 1fr; }
     .cards-grid { grid-template-columns: 1fr; }
     .scores-grid { grid-template-columns: 1fr 1fr; }
@@ -1018,14 +1035,22 @@
     .tl-year { margin-top: 0; }
 
     #hero, #timeline, #working, #problem, #scorecard, #playbook, #quickwins {
-      padding-left: 5%;
-      padding-right: 5%;
+      padding-left: 6%;
+      padding-right: 6%;
     }
+
+    /* Section titles slightly smaller */
+    .section-title { font-size: clamp(24px, 6vw, 36px); margin-bottom: 36px; }
+    .win-item { padding: 18px 16px; }
+    .gap-card { padding: 16px 16px; }
+    .work-card { padding: 28px 20px; }
+    .playbook-card { padding: 28px 20px; }
   }
 
   @media (max-width: 480px) {
     .scores-grid { grid-template-columns: 1fr; }
     .win-item { grid-template-columns: 40px 1fr; }
+    .photo-ring { width: 140px; height: 140px; }
   }
 </style>
 </head>
