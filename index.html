@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Brand Audit: Sohil Barad</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #E8A830;
+    --gold-light: #F5C05A;
+    --gold-dim: rgba(232,168,48,0.15);
+    --bg: #0A0C10;
+    --bg2: #0F1218;
+    --bg3: #141820;
+    --surface: #1A1F2C;
+    --surface2: #222840;
+    --text: #F0EDE8;
+    --muted: #8892A4;
+    --green: #2EC97B;
+    --red: #E85050;
+    --blue: #4A9EE8;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .display { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .italic { font-style: italic; }
+
+  /* ── FADE IN ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+  /* ════════════════════════════════════
+     SECTION 1 — HERO
+  ════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 8%;
+    position: relative;
+    overflow: hidden;
+    gap: 60px;
+  }
+
+  /* Sunray background */
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(ellipse at center, rgba(232,168,48,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .photo-ring {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+  }
+
+  .photo-ring svg {
+    position: absolute;
+    inset: -12px;
+    width: calc(100% + 24px);
+    height: calc(100% + 24px);
+    animation: spin 12s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .photo-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border: 3px solid rgba(232,168,48,0.4);
+  }
+
+  .score-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 28px;
+    text-align: center;
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .score-badge .score-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .score-badge .score-denom {
+    font-size: 24px;
+    color: var(--muted);
+  }
+
+  .score-badge .score-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* Score ring SVG */
+  .score-ring-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 8px;
+  }
+
+  .score-ring-wrap svg {
+    transform: rotate(-90deg);
+  }
+
+  .score-ring-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-ring-inner .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .score-ring-inner .denom {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .hero-right {
+    position: relative;
+    z-index: 2;
+  }
+
+  .audit-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(232,168,48,0.3);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .audit-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+
+  .stat-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 18px;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .pill span {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  .scroll-hint svg { opacity: 0.5; }
+
+  /* ════════════════════════════════════
+     SECTION 2 — TIMELINE
+  ════════════════════════════════════ */
+  #timeline {
+    padding: 100px 8%;
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #timeline::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 600;
+    margin-bottom: 56px;
+    color: var(--text);
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* Horizontal timeline */
+  .timeline-track {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dim) transparent;
+  }
+
+  .timeline-track::-webkit-scrollbar { height: 3px; }
+  .timeline-track::-webkit-scrollbar-track { background: transparent; }
+  .timeline-track::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .tl-item {
+    flex: 0 0 220px;
+    position: relative;
+    padding: 0 0 0 24px;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--surface2));
+  }
+
+  .tl-item:last-child::before {
+    background: var(--gold);
+  }
+
+  .tl-dot {
+    position: absolute;
+    top: 4px;
+    left: -6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg2);
+    border: 2px solid var(--gold);
+    z-index: 1;
+  }
+
+  .tl-item.current .tl-dot {
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(232,168,48,0.6);
+  }
+
+  .tl-year {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 24px;
+    margin-bottom: 6px;
+  }
+
+  .tl-role {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .tl-org {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .tl-star {
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  /* ════════════════════════════════════
+     SECTION 3 — WHAT'S WORKING
+  ════════════════════════════════════ */
+  #working {
+    padding: 100px 8%;
+    background: var(--bg);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .work-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .work-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(46,201,123,0.3);
+  }
+
+  .work-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), transparent);
+  }
+
+  .work-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(46,201,123,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .work-card h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .work-card p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .work-card .metric {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ════════════════════════════════════
+     SECTION 4 — THE PROBLEM
+  ════════════════════════════════════ */
+  #problem {
+    padding: 100px 8%;
+    background: var(--bg2);
+    position: relative;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .donut-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .donut-svg-wrap {
+    position: relative;
+    width: 240px;
+    height: 240px;
+  }
+
+  .donut-svg-wrap svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .donut-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .donut-center .pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .donut-center .pct-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .donut-legend {
+    display: flex;
+    gap: 20px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .donut-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+    max-width: 220px;
+    line-height: 1.5;
+  }
+
+  .gap-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .gap-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: border-color 0.3s ease;
+  }
+
+  .gap-card:hover { border-color: rgba(232,80,80,0.35); }
+
+  .gap-indicator {
+    width: 8px;
+    min-width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+  }
+
+  .gap-indicator.red { background: var(--red); box-shadow: 0 0 8px rgba(232,80,80,0.5); }
+  .gap-indicator.amber { background: var(--gold); box-shadow: 0 0 8px rgba(232,168,48,0.5); }
+
+  .gap-text h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .gap-text p {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* ════════════════════════════════════
+     SECTION 5 — SCORECARD
+  ════════════════════════════════════ */
+  #scorecard {
+    padding: 100px 8%;
+    background: var(--bg);
+  }
+
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .score-card-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+
+  .ring-outer {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 16px;
+  }
+
+  .ring-outer svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .ring-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring-num .n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .ring-num .d {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .ring-bar {
+    height: 3px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .ring-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ════════════════════════════════════
+     SECTION 6 — PLAYBOOK
+  ════════════════════════════════════ */
+  #playbook {
+    padding: 100px 8%;
+    background: var(--bg2);
+  }
+
+  .playbook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .playbook-card {
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .playbook-card:hover { transform: translateY(-5px); }
+
+  .playbook-card.green {
+    background: linear-gradient(145deg, rgba(46,201,123,0.08), rgba(46,201,123,0.02));
+    border: 1px solid rgba(46,201,123,0.2);
+  }
+
+  .playbook-card.blue {
+    background: linear-gradient(145deg, rgba(74,158,232,0.08), rgba(74,158,232,0.02));
+    border: 1px solid rgba(74,158,232,0.2);
+  }
+
+  .playbook-card.gold {
+    background: linear-gradient(145deg, rgba(232,168,48,0.08), rgba(232,168,48,0.02));
+    border: 1px solid rgba(232,168,48,0.2);
+  }
+
+  .playbook-type {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .playbook-card.green .playbook-type { color: var(--green); }
+  .playbook-card.blue .playbook-type { color: var(--blue); }
+  .playbook-card.gold .playbook-type { color: var(--gold); }
+
+  .playbook-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .playbook-tagline {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .playbook-examples {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .playbook-examples li {
+    font-size: 14px;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .playbook-examples li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+  }
+
+  .playbook-card.green .playbook-examples li::before { color: var(--green); }
+  .playbook-card.blue .playbook-examples li::before { color: var(--blue); }
+  .playbook-card.gold .playbook-examples li::before { color: var(--gold); }
+
+  /* ════════════════════════════════════
+     SECTION 7 — QUICK WINS
+  ════════════════════════════════════ */
+  #quickwins {
+    padding: 100px 8%;
+    background: var(--bg);
+  }
+
+  .wins-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 860px;
+  }
+
+  .win-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .win-item:hover {
+    border-color: rgba(232,168,48,0.25);
+    transform: translateX(4px);
+  }
+
+  .win-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .win-content h4 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .win-transform {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .win-before, .win-after {
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .win-before {
+    background: rgba(232,80,80,0.1);
+    color: var(--red);
+    border: 1px solid rgba(232,80,80,0.2);
+  }
+
+  .win-after {
+    background: rgba(46,201,123,0.1);
+    color: var(--green);
+    border: 1px solid rgba(46,201,123,0.2);
+  }
+
+  .win-arrow {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ════════════════════════════════════
+     SECTION 8 — FOOTER
+  ════════════════════════════════════ */
+  #footer {
+    padding: 80px 8% 60px;
+    background: var(--bg2);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #footer::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(232,168,48,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 42px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text);
+    max-width: 680px;
+    margin: 0 auto 40px;
+    line-height: 1.35;
+  }
+
+  .footer-quote strong {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .footer-meta {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-meta a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .footer-meta a:hover { opacity: 0.7; }
+
+  /* ════════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .cards-grid { grid-template-columns: repeat(3, 1fr); }
+    .scores-grid { grid-template-columns: repeat(2, 1fr); }
+    .playbook-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    #hero {
+      grid-template-columns: 1fr;
+      padding: 60px 6%;
+      text-align: center;
+    }
+
+    .hero-left { align-items: center; }
+    .stat-pills { justify-content: center; }
+    .scroll-hint { justify-content: center; }
+
+    .photo-ring { width: 180px; height: 180px; }
+
+    .problem-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .scores-grid { grid-template-columns: 1fr 1fr; }
+    .playbook-grid { grid-template-columns: 1fr; }
+
+    .timeline-track {
+      flex-direction: column;
+      overflow-x: visible;
+    }
+
+    .tl-item {
+      flex: 0 0 auto;
+      padding: 16px 0 16px 32px;
+    }
+
+    .tl-item::before {
+      top: 0;
+      left: 12px;
+      right: auto;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--surface2));
+    }
+
+    .tl-dot { top: 20px; left: 6px; }
+
+    .tl-year { margin-top: 0; }
+
+    #hero, #timeline, #working, #problem, #scorecard, #playbook, #quickwins {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .scores-grid { grid-template-columns: 1fr; }
+    .win-item { grid-template-columns: 40px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 — HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left fade-up">
+    <div class="photo-ring">
+      <!-- Spinning dashed ring -->
+      <svg viewBox="0 0 284 284" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="142" cy="142" r="138" stroke="#E8A830" stroke-width="1.5"
+          stroke-dasharray="8 6" opacity="0.5"/>
+        <circle cx="142" cy="142" r="128" stroke="#E8A830" stroke-width="0.5"
+          stroke-dasharray="3 14" opacity="0.3"/>
+      </svg>
+      <img src="./sohail.jpeg" alt="Sohil Barad">
+    </div>
+
+    <!-- Score ring -->
+    <div class="score-badge">
+      <div class="score-ring-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#E8A830" stroke-width="10"
+            stroke-linecap="round" stroke-dasharray="188 314"
+            style="transition:stroke-dasharray 1.5s ease" id="heroRing"/>
+        </svg>
+        <div class="score-ring-inner">
+          <span class="num">6</span>
+          <span class="denom">/ 10</span>
+        </div>
+      </div>
+      <div class="score-label">Overall Brand Score</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="audit-label fade-up">LinkedIn Brand Audit · June 2026</div>
+
+    <h1 class="hero-headline fade-up">
+      The Solar Leader<br>
+      LinkedIn <em>Doesn't Know</em><br>
+      Yet
+    </h1>
+
+    <p class="hero-sub fade-up">
+      A personal brand audit for <strong>Sohil Barad</strong>, AVP Sales at Ganesh Green Bharat Limited.
+      9 years of solar expertise. A story that deserves a bigger stage.
+    </p>
+
+    <div class="stat-pills fade-up">
+      <div class="pill"><span>9+</span> Years in Solar</div>
+      <div class="pill"><span>5,703</span> Followers</div>
+      <div class="pill"><span>11</span> Recommendations</div>
+      <div class="pill"><span>4+</span> Media Features</div>
+    </div>
+
+    <div class="scroll-hint fade-up">
+      <span>Scroll to explore the full audit</span>
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M8 1v14M2 11l6 6 6-6" stroke="#E8A830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — TIMELINE
+══════════════════════════════════════ -->
+<section id="timeline">
+  <div class="section-label fade-up">The Journey</div>
+  <h2 class="section-title fade-up">From Civil Engineer to <em>Solar Sales Leader</em></h2>
+
+  <div class="timeline-track fade-up">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2013 – 2017</div>
+      <div class="tl-role">BTech Civil Engineering</div>
+      <div class="tl-org">PDPU + Red Bull Student Brand Manager, first spark of entrepreneurship</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2017 – 2018</div>
+      <div class="tl-role">Summer Trainee</div>
+      <div class="tl-org">Mott MacDonald, engineering foundation</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2018 – 2019</div>
+      <div class="tl-role">MBA Infrastructure</div>
+      <div class="tl-org">Adani Institute of Infrastructure Management</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2019 – 2024</div>
+      <div class="tl-role">Asst Manager to Associate Manager</div>
+      <div class="tl-org">Adani Solar, 5 years scaling India's largest solar brand</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">May 2024 – Apr 2026</div>
+      <div class="tl-role">GM, Global Sales</div>
+      <div class="tl-org">GREW Solar, international markets across USA, Europe and Africa</div>
+    </div>
+    <div class="tl-item current">
+      <div class="tl-dot"></div>
+      <div class="tl-year">Apr 2026 – Now <span class="tl-star">★</span></div>
+      <div class="tl-role">AVP Sales</div>
+      <div class="tl-org">Ganesh Green Bharat Limited, NSE-listed, scaling India's solar story globally</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — WHAT'S WORKING
+══════════════════════════════════════ -->
+<section id="working">
+  <div class="section-label fade-up">What's Working</div>
+  <h2 class="section-title fade-up">Strong Raw Material.<br><em>Underutilised.</em></h2>
+
+  <div class="cards-grid">
+    <div class="work-card fade-up">
+      <div class="work-icon">🏆</div>
+      <h3>Industry Authority</h3>
+      <p>Featured in pv magazine India, EPR Magazine, WNA Industry Voice, and named "Torchbearer of Renewables" by Industrial Outlook. The media already recognises him.</p>
+      <div class="metric">4+ Features</div>
+    </div>
+    <div class="work-card fade-up">
+      <div class="work-icon">✍️</div>
+      <h3>Personal Voice</h3>
+      <p>When Sohil writes himself about leadership, trust and long-term thinking, posts average 100–150 organic likes. His authentic voice is the brand's biggest asset.</p>
+      <div class="metric">~138 avg likes</div>
+    </div>
+    <div class="work-card fade-up">
+      <div class="work-icon">🤝</div>
+      <h3>Trust Signals</h3>
+      <p>11 recommendations including Kevin Graves, Senior Director at Oriden Power (USA). International client validation is rare and powerful social proof.</p>
+      <div class="metric">11 Recommendations</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 4 — THE PROBLEM
+══════════════════════════════════════ -->
+<section id="problem">
+  <div class="section-label fade-up">The Problem</div>
+  <h2 class="section-title fade-up">The Feed Has Become<br>a <em>Company Bulletin Board</em></h2>
+
+  <div class="problem-grid">
+    <div class="donut-wrap fade-up">
+      <div class="donut-svg-wrap">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="28"/>
+          <!-- 70% reposts: 360*0.7 = 252, circumference = 2π*80 ≈ 502.65 -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#E85050" stroke-width="28"
+            stroke-linecap="butt" stroke-dasharray="0 502" id="donutReposts"
+            style="transition: stroke-dasharray 1.5s cubic-bezier(0.4,0,0.2,1)"/>
+          <!-- 30% original: remaining arc -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#2EC97B" stroke-width="28"
+            stroke-linecap="butt" stroke-dasharray="0 502" stroke-dashoffset="-352" id="donutOriginal"
+            style="transition: stroke-dasharray 1.5s cubic-bezier(0.4,0,0.2,1) 0.2s"/>
+        </svg>
+        <div class="donut-center">
+          <span class="pct">70%</span>
+          <span class="pct-label">Reposts</span>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#E85050"></div>
+          <span>Reposts (70%)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#2EC97B"></div>
+          <span>Original (30%)</span>
+        </div>
+      </div>
+      <p class="donut-caption">"Your audience can't predict what value you'll bring, so they stop following closely."</p>
+    </div>
+
+    <div class="gap-cards fade-up">
+      <div class="gap-card">
+        <div class="gap-indicator red"></div>
+        <div class="gap-text">
+          <h4>No "About" Section Written</h4>
+          <p>LinkedIn shows a "Top Skills" card in its place. Every new visitor leaves without knowing the story behind the name. First impressions are being missed.</p>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-indicator amber"></div>
+        <div class="gap-text">
+          <h4>Headline Is Role-Centric, Not Value-Centric</h4>
+          <p>"AVP @ GGBL | Driving Sales Growth" tells visitors his job title. It doesn't tell them why they should follow him or what insight they'll gain.</p>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-indicator amber"></div>
+        <div class="gap-text">
+          <h4>Featured Section Sitting Empty</h4>
+          <p>pv magazine, EPR Magazine, and Industrial Outlook features are prime social proof and none of them are pinned. Free credibility, unused.</p>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-indicator red"></div>
+        <div class="gap-text">
+          <h4>No Native Video, Ever</h4>
+          <p>LinkedIn's algorithm actively prioritises native video. One 60-second talking-head post per week would dramatically outperform 10 text reposts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 5 — SCORECARD
+══════════════════════════════════════ -->
+<section id="scorecard">
+  <div class="section-label fade-up">The Scorecard</div>
+  <h2 class="section-title fade-up">Where He Stands<br><em>Right Now</em></h2>
+
+  <div class="scores-grid">
+    <div class="score-card fade-up" data-score="6">
+      <div class="score-card-label">Profile Completeness</div>
+      <div class="ring-outer">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="#E8A830" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="0 226" class="score-circle" data-max="226" data-pct="60"/>
+        </svg>
+        <div class="ring-num"><span class="n" style="color:#E8A830">6</span><span class="d">/10</span></div>
+      </div>
+      <div class="ring-bar"><div class="ring-bar-fill" style="background:#E8A830" data-w="60"></div></div>
+    </div>
+
+    <div class="score-card fade-up" data-score="7">
+      <div class="score-card-label">Posting Consistency</div>
+      <div class="ring-outer">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="#2EC97B" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="0 226" class="score-circle" data-max="226" data-pct="70"/>
+        </svg>
+        <div class="ring-num"><span class="n" style="color:#2EC97B">7</span><span class="d">/10</span></div>
+      </div>
+      <div class="ring-bar"><div class="ring-bar-fill" style="background:#2EC97B" data-w="70"></div></div>
+    </div>
+
+    <div class="score-card fade-up" data-score="5">
+      <div class="score-card-label">Personal Brand Clarity</div>
+      <div class="ring-outer">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="#E85050" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="0 226" class="score-circle" data-max="226" data-pct="50"/>
+        </svg>
+        <div class="ring-num"><span class="n" style="color:#E85050">5</span><span class="d">/10</span></div>
+      </div>
+      <div class="ring-bar"><div class="ring-bar-fill" style="background:#E85050" data-w="50"></div></div>
+    </div>
+
+    <div class="score-card fade-up" data-score="8">
+      <div class="score-card-label">Industry Authority</div>
+      <div class="ring-outer">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="#2EC97B" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="0 226" class="score-circle" data-max="226" data-pct="80"/>
+        </svg>
+        <div class="ring-num"><span class="n" style="color:#2EC97B">8</span><span class="d">/10</span></div>
+      </div>
+      <div class="ring-bar"><div class="ring-bar-fill" style="background:#2EC97B" data-w="80"></div></div>
+    </div>
+
+    <div class="score-card fade-up" data-score="7">
+      <div class="score-card-label">Engagement Quality</div>
+      <div class="ring-outer">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="#4A9EE8" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="0 226" class="score-circle" data-max="226" data-pct="70"/>
+        </svg>
+        <div class="ring-num"><span class="n" style="color:#4A9EE8">7</span><span class="d">/10</span></div>
+      </div>
+      <div class="ring-bar"><div class="ring-bar-fill" style="background:#4A9EE8" data-w="70"></div></div>
+    </div>
+
+    <div class="score-card fade-up" data-score="4">
+      <div class="score-card-label">Hashtag Strategy</div>
+      <div class="ring-outer">
+        <svg viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="45" cy="45" r="36" fill="none" stroke="#E85050" stroke-width="8"
+            stroke-linecap="round" stroke-dasharray="0 226" class="score-circle" data-max="226" data-pct="40"/>
+        </svg>
+        <div class="ring-num"><span class="n" style="color:#E85050">4</span><span class="d">/10</span></div>
+      </div>
+      <div class="ring-bar"><div class="ring-bar-fill" style="background:#E85050" data-w="40"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 6 — PLAYBOOK
+══════════════════════════════════════ -->
+<section id="playbook">
+  <div class="section-label fade-up">The Strategy</div>
+  <h2 class="section-title fade-up">Three Content Buckets.<br><em>One Distinct Voice.</em></h2>
+
+  <div class="playbook-grid">
+    <div class="playbook-card green fade-up">
+      <div class="playbook-type">Evergreen</div>
+      <h3>Build Authority That Lasts</h3>
+      <p class="playbook-tagline">Posts that get discovered and shared months after publishing</p>
+      <ul class="playbook-examples">
+        <li>"9 years in solar sales: what I learned about long-term clients vs. transactional wins"</li>
+        <li>"TOPCon vs. Mono PERC: a buyer's guide for non-technical decision makers"</li>
+        <li>"How to read a solar module spec sheet if you're not an engineer"</li>
+        <li>"From civil engineer to solar VP: what I wish someone told me"</li>
+      </ul>
+    </div>
+
+    <div class="playbook-card blue fade-up">
+      <div class="playbook-type">Trending</div>
+      <h3>Ride the Industry Conversation</h3>
+      <p class="playbook-tagline">Timely commentary that drives short-term visibility spikes</p>
+      <ul class="playbook-examples">
+        <li>India's PLI Scheme: what it means for domestic module buyers right now</li>
+        <li>PM Surya Ghar Muft Bijli Yojana: rooftop solar expansion commentary</li>
+        <li>The 1000 MWh BESS deal with NTPC REL: what it signals for utility storage</li>
+        <li>China vs. India solar manufacturing costs: the 2026 real story</li>
+      </ul>
+    </div>
+
+    <div class="playbook-card gold fade-up">
+      <div class="playbook-type">Niche</div>
+      <h3>Own Your Segment</h3>
+      <p class="playbook-tagline">Deep-expertise content for EPC contractors, distributors & developers</p>
+      <ul class="playbook-examples">
+        <li>"A channel partner's guide to evaluating a solar module manufacturer"</li>
+        <li>"What it really takes to win an international solar order from scratch" (Kenya story)</li>
+        <li>"Lessons from speaking at PowerPax Varanasi: what Tier-2 India wants from solar"</li>
+        <li>Vertical integration in manufacturing: EPC procurement certainty explained</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 7 — QUICK WINS
+══════════════════════════════════════ -->
+<section id="quickwins">
+  <div class="section-label fade-up">Quick Wins</div>
+  <h2 class="section-title fade-up">Five Changes.<br><em>This Week.</em></h2>
+
+  <div class="wins-list">
+    <div class="win-item fade-up">
+      <div class="win-num">01</div>
+      <div class="win-content">
+        <h4>Write the "About" Section</h4>
+        <p style="font-size:15px;color:var(--muted)">150–200 words. First person. Civil engineer to brand builder to solar VP. Include keywords: solar manufacturing, international sales, B2B, EPC, renewable energy.</p>
+        <div class="win-transform">
+          <span class="win-before">Empty skills card</span>
+          <span class="win-arrow">→</span>
+          <span class="win-after">Compelling narrative that ranks in LinkedIn search</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="win-item fade-up">
+      <div class="win-num">02</div>
+      <div class="win-content">
+        <h4>Pin 3 Media Features to the Featured Section</h4>
+        <p style="font-size:15px;color:var(--muted)">pv magazine India, EPR Magazine and "Torchbearer of Renewables" by Industrial Outlook. This social proof is sitting idle while every new visitor misses it.</p>
+        <div class="win-transform">
+          <span class="win-before">Featured section empty</span>
+          <span class="win-arrow">→</span>
+          <span class="win-after">3 credibility anchors visible in 2 seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="win-item fade-up">
+      <div class="win-num">03</div>
+      <div class="win-content">
+        <h4>Rewrite the Headline: Value Over Title</h4>
+        <p style="font-size:15px;color:var(--muted)">Your headline is the most-read line on your profile. Make it tell people what insight they gain by following you.</p>
+        <div class="win-transform">
+          <span class="win-before">AVP @ GGBL | Driving Sales Growth</span>
+          <span class="win-arrow">→</span>
+          <span class="win-after">Scaling India's Solar Story | AVP Sales | International Markets | TOPCon | EPC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="win-item fade-up">
+      <div class="win-num">04</div>
+      <div class="win-content">
+        <h4>Stop Reposting. Start Experimenting.</h4>
+        <p style="font-size:15px;color:var(--muted)">As a sales leader, your credibility is built on how you think, not what you share. Shift from reposts to original content and try different formats: short video, written frameworks, POV takes on industry news. Video in particular is underused — a 60-second clip of you speaking candidly about solar will land harder than any company announcement. See what resonates, then double down on it.</p>
+        <div class="win-transform">
+          <span class="win-before">Repost-heavy feed, no format strategy</span>
+          <span class="win-arrow">→</span>
+          <span class="win-after">Original content in your own voice, tested across formats</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="win-item fade-up">
+      <div class="win-num">05</div>
+      <div class="win-content">
+        <h4>Fix the Hashtag Strategy</h4>
+        <p style="font-size:15px;color:var(--muted)">Currently using between 5 and 30 hashtags with no consistency. For B2B niche content, 5–8 focused tags outperform 30 generic ones every time.</p>
+        <div class="win-transform">
+          <span class="win-before">Up to 30 random hashtags per post</span>
+          <span class="win-arrow">→</span>
+          <span class="win-after">#SolarIndia #RenewableEnergy #SolarEPC #B2BSales #MakeInIndia (5–8 max)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 8 — FOOTER
+══════════════════════════════════════ -->
+<footer id="footer">
+  <p class="footer-quote fade-up">
+    "The potential is already here.<br>
+    The story just needs <strong>telling.</strong>"
+  </p>
+  <p class="footer-meta fade-up">
+    Audit prepared June 17, 2026 &nbsp;|&nbsp;
+    <a href="https://ganeshgreen.com/" target="_blank">Ganesh Green Bharat Limited</a> &nbsp;|&nbsp;
+    NSE-Listed Solar Module Manufacturer, India
+  </p>
+</footer>
+
+<script>
+  // ── IntersectionObserver: fade-up elements ──
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // ── Animate score ring circles ──
+  const scoreCircles = document.querySelectorAll('.score-circle');
+  const scoreObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const pct = parseFloat(el.dataset.pct) / 100;
+        const max = parseFloat(el.dataset.max);
+        el.style.strokeDasharray = (pct * max) + ' ' + max;
+        scoreObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  scoreCircles.forEach(c => scoreObs.observe(c));
+
+  // ── Animate ring bar fills ──
+  const barFills = document.querySelectorAll('.ring-bar-fill');
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.w + '%';
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  barFills.forEach(b => barObs.observe(b));
+
+  // ── Animate donut chart ──
+  const donutObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        // circumference = 2 * pi * 80 ≈ 502.65
+        const C = 502.65;
+        document.getElementById('donutReposts').style.strokeDasharray = (0.70 * C) + ' ' + C;
+        document.getElementById('donutOriginal').style.strokeDasharray = (0.30 * C) + ' ' + C;
+        donutObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const donutEl = document.querySelector('.donut-svg-wrap');
+  if (donutEl) donutObs.observe(donutEl);
+
+  // ── Hero ring animate on load ──
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // 6/10 = 60% of 2π*50 ≈ 314.16
+      document.getElementById('heroRing').style.strokeDasharray = '188 314';
+      fadeEls.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    }, 300);
+  });
+</script>
+</body>
+</html>
