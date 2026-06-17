@@ -935,9 +935,21 @@
       min-height: unset;
     }
 
-    /* Order: photo+score first, text second */
-    .hero-left {
+    /* hero-right becomes transparent to flex so its children join the column */
+    .hero-right {
+      display: contents;
+    }
+
+    /* Order: label+headline (1) → photo+score (2) → sub+pills (3) */
+    .hero-top-text {
       order: 1;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-left {
+      order: 2;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -946,10 +958,10 @@
       width: 100%;
     }
 
-    .hero-right {
-      order: 2;
-      text-align: center;
+    .hero-bottom-text {
+      order: 3;
       width: 100%;
+      text-align: center;
     }
 
     /* Photo: large, centered */
@@ -1080,32 +1092,36 @@
   </div>
 
   <div class="hero-right">
-    <div class="audit-label fade-up">LinkedIn Brand Audit · June 2026</div>
+    <div class="hero-top-text">
+      <div class="audit-label fade-up">LinkedIn Brand Audit · June 2026</div>
 
-    <h1 class="hero-headline fade-up">
-      The Solar Leader<br>
-      LinkedIn <em>Doesn't Know</em><br>
-      Yet
-    </h1>
-
-    <p class="hero-sub fade-up">
-      A personal brand audit for <strong>Sohil Barad</strong>, AVP Sales at Ganesh Green Bharat Limited.
-      9 years of solar expertise. A story that deserves a bigger stage.
-    </p>
-
-    <div class="stat-pills fade-up">
-      <div class="pill"><span>9+</span> Years in Solar</div>
-      <div class="pill"><span>5,703</span> Followers</div>
-      <div class="pill"><span>11</span> Recommendations</div>
-      <div class="pill"><span>4+</span> Media Features</div>
+      <h1 class="hero-headline fade-up">
+        The Solar Leader<br>
+        LinkedIn <em>Doesn't Know</em><br>
+        Yet
+      </h1>
     </div>
-  </div>
 
-  <div class="scroll-hint fade-up hero-scroll">
-    <span>Scroll to explore the full audit</span>
-    <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
-      <path d="M8 1v14M2 11l6 6 6-6" stroke="#E8A830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <div class="hero-bottom-text">
+      <p class="hero-sub fade-up">
+        A personal brand audit for <strong>Sohil Barad</strong>, AVP Sales at Ganesh Green Bharat Limited.
+        9 years of solar expertise. A story that deserves a bigger stage.
+      </p>
+
+      <div class="stat-pills fade-up">
+        <div class="pill"><span>9+</span> Years in Solar</div>
+        <div class="pill"><span>5,703</span> Followers</div>
+        <div class="pill"><span>11</span> Recommendations</div>
+        <div class="pill"><span>4+</span> Media Features</div>
+      </div>
+
+      <div class="scroll-hint fade-up hero-scroll">
+        <span>Scroll to explore the full audit</span>
+        <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+          <path d="M8 1v14M2 11l6 6 6-6" stroke="#E8A830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
