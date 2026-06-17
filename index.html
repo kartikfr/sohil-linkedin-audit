@@ -919,15 +919,36 @@
   @media (max-width: 768px) {
     #hero {
       grid-template-columns: 1fr;
-      padding: 60px 6%;
+      padding: 48px 6% 56px;
       text-align: center;
+      gap: 32px;
     }
 
-    .hero-left { align-items: center; }
+    /* Photo + score badge side by side on mobile */
+    .hero-left {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .photo-ring { width: 140px; height: 140px; flex-shrink: 0; }
+
+    /* Score badge compact on mobile */
+    .score-badge {
+      max-width: 150px;
+      padding: 16px 18px;
+    }
+
+    .score-ring-wrap { width: 90px; height: 90px; }
+
+    .score-ring-inner .num { font-size: 28px; }
+    .score-ring-inner .denom { font-size: 11px; }
+
+    .score-badge .score-label { font-size: 9px; letter-spacing: 0.08em; margin-top: 4px; }
+
     .stat-pills { justify-content: center; }
     .scroll-hint { justify-content: center; }
-
-    .photo-ring { width: 180px; height: 180px; }
 
     .problem-grid { grid-template-columns: 1fr; }
     .cards-grid { grid-template-columns: 1fr; }
@@ -966,6 +987,13 @@
   @media (max-width: 480px) {
     .scores-grid { grid-template-columns: 1fr; }
     .win-item { grid-template-columns: 40px 1fr; }
+
+    /* Tighten hero further on small phones */
+    .hero-left { gap: 14px; }
+    .photo-ring { width: 120px; height: 120px; }
+    .score-badge { max-width: 136px; padding: 12px 14px; }
+    .score-ring-wrap { width: 76px; height: 76px; }
+    .score-ring-inner .num { font-size: 24px; }
   }
 </style>
 </head>
@@ -1401,9 +1429,7 @@
     The story just needs <strong>telling.</strong>"
   </p>
   <p class="footer-meta fade-up">
-    Audit prepared June 17, 2026 &nbsp;|&nbsp;
-    <a href="https://ganeshgreen.com/" target="_blank">Ganesh Green Bharat Limited</a> &nbsp;|&nbsp;
-    NSE-Listed Solar Module Manufacturer, India
+    <a href="https://www.linkedin.com/in/sohil-barad-48555715a/" target="_blank">Sohil Barad</a>
   </p>
 </footer>
 
